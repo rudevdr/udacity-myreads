@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import './App.css'
 import * as BooksAPI from "./BooksAPI";
-import BookShelf from "./BookShelf.js";
 
 class BookRack extends Component {
 
@@ -22,21 +21,11 @@ class BookRack extends Component {
 		return this.state.books.filter(book => book.shelf === shelf);
 	}
 
-	/*getShelfOrder(allBooks){
-		return {
-			'Currently Reading': this.getBooksByShelf(allBooks, 'currentlyReading'),
-			'Want To Read': this.getBooksByShelf(allBooks, 'wantToRead'),
-			'Read': this.getBooksByShelf(allBooks, 'read')
-		}
-	}*/
-
-
     componentWillMount() {
         BooksAPI.getAll().then((books) => {
             this.setState({books: books});
         });
     }
-
 
 
 	render(){
@@ -61,5 +50,34 @@ class BookRack extends Component {
 		)}
 }
 
+const BookShelf = (props) => (
+	<div className="bookshelf">
+		<h2 className="bookshelf-title">{props.name}</h2>
+		<div className="bookshelf-books">
+			<ol className="books-grid">
+				{props.books.map((book) => (
+				<li>
+					<div className="book">
+						<div className="book-top">
+							<div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url("${book.imageLinks.thumbnail}")`}}></div>
+							<div className="book-shelf-changer">
+								<select>
+									<option value="move" disabled>Move to...</option>
+									<option value="currentlyReading">Currently Reading</option>
+									<option value="wantToRead">Want to Read</option>
+									<option value="read">Read</option>
+									<option value="none">None</option>
+								</select>
+							</div>
+						</div>
+						<div className="book-title">{book.title}</div>
+						<div className="book-authors">{book.author}</div>
+					</div>
+				</li>
+				))}
+			</ol>
+		</div>
+	</div>
+	)
 
 export default BookRack

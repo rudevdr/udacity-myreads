@@ -9,6 +9,7 @@ class BookSearch extends Component {
 		super(props);
 		this.state = {
 			books: [],
+			currentBooks: []
 		}
 		this.getSearchResultName = this.getSearchResultName.bind(this);
 		this.updateBookShelf = this.updateBookShelf.bind(this);
@@ -20,6 +21,13 @@ class BookSearch extends Component {
 			return "Found "+this.state.books.length+" Results"
 		}
 		else return ""
+	}
+
+	componentWillMount(){
+         BooksAPI.getAll().then((books) => {
+            this.setState({currentBooks: books});
+        });
+
 	}
 
 	updateBookShelf(book, shelf) {
@@ -34,7 +42,10 @@ class BookSearch extends Component {
 			BooksAPI.search(query).then((searchableBooks) => {
 				if (searchableBooks.length) {
 					searchableBooks.forEach((book, index) => {
-						if (!book.shelf) {
+                        let matchingBook = this.state.currentBooks.find((currentBook) => currentBook.id === book.id);
+						if (matchingBook) {
+							book.shelf = matchingBook.shelf
+						} else {
 							book.shelf = 'none'
 						}
 						searchableBooks[index] = book;

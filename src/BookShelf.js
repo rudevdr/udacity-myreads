@@ -8,7 +8,7 @@ class BookShelf extends Component{
 				<h2 className="bookshelf-title">{this.props.name}</h2>
 				<div className="bookshelf-books">
 					<ol className="books-grid">
-					{this.props.books.filter(book => book.imageLinks.thumbnail).map((book, index) => (
+					{this.props.books.filter(book => book.imageLinks).map((book, index) => (
 						<li key={index}>
 							<div className="book">
 								<div className="book-top">

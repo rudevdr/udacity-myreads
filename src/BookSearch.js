@@ -42,8 +42,8 @@ class BookSearch extends Component {
 			BooksAPI.search(query).then((searchableBooks) => {
 				if (searchableBooks.length) {
 					searchableBooks.forEach((book, index) => {
-
-						this.state.currentBooks.find((currentBook) => currentBook.id === book.id) ?  book.shelf = matchingBook.shelf : book.shelf = 'none'
+						let matchingBook = this.state.currentBooks.find((currentBook) => currentBook.id === book.id);
+						matchingBook ?  book.shelf = matchingBook.shelf : book.shelf = 'none'
 
 						searchableBooks[index] = book;
 

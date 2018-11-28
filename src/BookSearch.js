@@ -54,7 +54,7 @@ class BookSearch extends Component {
 					});
 				}
 				else {
-					this.setState({ });
+					this.setState({ books: [] });
 				}
 			});
 		} else {

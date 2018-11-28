@@ -42,23 +42,19 @@ class BookSearch extends Component {
 			BooksAPI.search(query).then((searchableBooks) => {
 				if (searchableBooks.length) {
 					searchableBooks.forEach((book, index) => {
-                        let matchingBook = this.state.currentBooks.find((currentBook) => currentBook.id === book.id);
-						if (matchingBook) {
-							book.shelf = matchingBook.shelf
-						} else {
-							book.shelf = 'none'
-						}
+
+						this.state.currentBooks.find((currentBook) => currentBook.id === book.id) ?  book.shelf = matchingBook.shelf : book.shelf = 'none'
+
 						searchableBooks[index] = book;
 
 					});
+
 					this.setState({
 						books: searchableBooks,
 					});
 				}
 				else {
-					this.setState({
-
-					});
+					this.setState({ });
 				}
 			});
 		} else {

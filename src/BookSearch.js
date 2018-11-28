@@ -24,18 +24,22 @@ class BookSearch extends Component {
 	}
 
 	componentWillMount(){
-         BooksAPI.getAll().then((books) => {
+		this.fetchAllBooks();
+
+	}
+
+
+	fetchAllBooks(){
+        BooksAPI.getAll().then((books) => {
             this.setState({currentBooks: books});
         });
-
 	}
 
 	updateBookShelf(book, shelf) {
-		var currentBooks = this.state.books;
-		currentBooks.filter(selectedBook => selectedBook.id === book.id)[0].shelf = shelf;
+		this.state.books.find((cb) => cb.id === book.id).shelf = shelf
+		this.setState({books: this.state.books})
 		BooksAPI.update(book, shelf);
 	}
-
 
 	searchBooks(query){
 		if (query) {

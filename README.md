@@ -1,6 +1,7 @@
 # Udacity-MyReads
 
-This project was inspired from a Udacity project for frontend track.
+
+This project was inspired from a Udacity project for frontend track. Its a bookreader app which let you search and keep books in different "shelves". You can search for thousands of books and can add them to three sections: "Currently Reading", "Want To Read" and "Read". 
 
 # How to run the application
 
